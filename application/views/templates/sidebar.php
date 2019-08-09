@@ -33,13 +33,18 @@
         $menuId = $m['id'];
         $querySubmenu = "SELECT * FROM `user_sub_menu`
                           WHERE `menu_id` = $menuId
-                            AND `is_acktive` = 1
+                            AND `is_active` = 1
                         ";
         $subMenu = $this->db->query($querySubmenu)->result_array();
         ?>
 
         <?php foreach ($subMenu as $sm) : ?>
-            <li class="nav-item">
+            <?php if ($title == $sm['title']) : ?>
+                <li class="nav-item active">
+                <?php else : ?>
+                <li class="nav-item">
+                <?php endif ?>
+
                 <a class="nav-link" href="<?= base_url($sm['url']) ?>">
                     <i class="<?= $sm['icon'] ?>"></i>
                     <span><?= $sm['title'] ?></span>

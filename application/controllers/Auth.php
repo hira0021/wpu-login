@@ -30,7 +30,7 @@ class Auth extends CI_Controller
 
         $user = $this->db->get_where('user', ['email' => $email])->row_array();
         if ($user) {
-            if ($user['is_acktive'] == 1) {
+            if ($user['is_active'] == 1) {
                 if (password_verify($password, $user['password'])) {
                     $data = [
                         'email' => $user['email'],
@@ -50,7 +50,7 @@ class Auth extends CI_Controller
                 }
             } else {
                 $this->session->set_flashdata('message', '<div class="alert alert-danger" role="alert">
-                                                        This email is not been acktivated!
+                                                        This email is not been activated!
                                                         </div>');
                 redirect('auth');
             }
@@ -86,7 +86,7 @@ class Auth extends CI_Controller
                 'image' => 'default.jpg',
                 'password' => password_hash($this->input->post('password1'), PASSWORD_DEFAULT),
                 'role_id' => 2,
-                'is_acktive' => 1,
+                'is_active' => 1,
                 'date_created' => time()
             ];
 
